@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" integrity="sha512-bLT0Qm9VnAYZDflyKcBaQ2gg0hSYNQrJ8RilYldYQ1FxQYoCLtUjuuRuZo+fjqhx/qtq/1itJ0C2ejDxltZVFg==" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/2.5.3/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
+    <script>
+        $(document).ready(function () {
+            const list = [
+                { id: "6231302015", name: "Siwakiat" ,score:0},
+                { id: "6231302009", name: "Noppassin",score:0 },
+                { id: "6231302005", name: "Chirawat" ,score:0},
+                { id: "6231302012", name: "Phornwanat" ,score:0},
+            ];
+            // let dropdown = ("#dropdownId");
+            // for (let i = 0; i < list.length; i++) {
+            //     const element = list[i];
+            // }
+            //loop
+            let data = "";
+            for(i in list) {
+                data += `<option value="${list[i].id}">${list[i].id}</option>`;
+            }
+            $("#list").append(data);
+
+            $("#btn").click(function() {
+                let sum = 0;
+                for(i in list){
+                    sum = sum+parseInt(list[i].score);
+                }
+                let avg = sum/list.length;
+                alert("average = "+ avg);
+            });
+
+            $("#scor").change(function() {
+                let score = $("#scor").val();
+                let id = $("#list").val();
+                let idx = 0;
+                for(i in list) {
+                    if (id == list[i].id) {
+                        idx = i;
+                        break;
+                    }
+                }
+                list[idx].score = score;
+                console.log(list);
+            });
+
+            $("#list").change(function(){
+                let id = $("#list").val();
+                let idx = 0;
+                for(i in list) {
+                    if (id == list[i].id) {
+                        idx = i;
+                        break;
+                    }
+                }
+                $("#scor").val(list[idx].score);
+            });
+        });
+    </script>
+</head>
+
+<body>
+    
+        <h1>Score</h1>
+    
+        <div class="container-fluid">
+        <strong>ID  </strong><select name="sel" id="list" >
+                <option value="-">-</option>
+            </select>
+            <strong>Score  </strong>
+            <select name="scor" id="scor">
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5</option>
+            </select>
+            
+            <button type="button" id="btn" class="btn btn-primary ml-3">Show</button>
+        </div>
+        
+</body>
+
+</html>
